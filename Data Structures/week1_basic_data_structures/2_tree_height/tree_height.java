@@ -22,8 +22,10 @@ public class tree_height {
 
 	public class TreeHeight {
 		int n;
-		int parent[];
-		
+		int[] parent;
+		int[] heights;
+
+
 		void read() throws IOException {
 			FastScanner in = new FastScanner();
 			n = in.nextInt();
@@ -31,18 +33,40 @@ public class tree_height {
 			for (int i = 0; i < n; i++) {
 				parent[i] = in.nextInt();
 			}
+			heights = new int[n];
+			for (int i = 0; i < n; i++) {
+				heights[i] = 0;
+			}
 		}
 
 		int computeHeight() {
+
                         // Replace this code with a faster implementation
+//			int maxHeight = 0;
+//			for (int vertex = 0; vertex < n; vertex++) {
+//				int height = 0;
+//				for (int i = vertex; i != -1; i = parent[i])
+//					height++;
+//				maxHeight = Math.max(maxHeight, height);
+//			}
+//			return maxHeight;
+
 			int maxHeight = 0;
 			for (int vertex = 0; vertex < n; vertex++) {
-				int height = 0;
-				for (int i = vertex; i != -1; i = parent[i])
-					height++;
+				int height = getHeight(vertex);
 				maxHeight = Math.max(maxHeight, height);
 			}
 			return maxHeight;
+		}
+		private int getHeight(int vertex) {
+			if (parent[vertex] == -1) {
+				return 1; // height of the root node is 1
+			}
+			if (heights[vertex] != 0) {
+				return heights[vertex]; // return cached height if already computed
+			}
+			heights[vertex] = 1 + getHeight(parent[vertex]); // compute height recursively
+			return heights[vertex];
 		}
 	}
 
