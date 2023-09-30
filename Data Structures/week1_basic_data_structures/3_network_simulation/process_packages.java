@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -29,8 +30,28 @@ class Buffer {
     }
 
     public Response Process(Request request) {
+        Response response = new Response(false, 0);
+
         // write your code here
-        return new Response(false, -1);
+        if (finish_time_.isEmpty()) {
+            finish_time_.add(request.arrival_time + request.process_time);
+            response.dropped = false;
+            response.start_time = request.arrival_time;
+        }
+        else {
+            int new_available_time = finish_time_.getLast();
+            if (request.arrival_time < new_available_time) {
+                response.dropped = true;
+                response.start_time = -1;
+            } else {
+                response.dropped = false;
+                response.start_time = request.arrival_time;
+                finish_time_.add(request.arrival_time + request.process_time);
+            }
+
+        }
+
+        return response;
     }
 
     private int size_;
