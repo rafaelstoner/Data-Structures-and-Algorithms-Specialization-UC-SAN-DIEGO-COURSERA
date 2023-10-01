@@ -7,6 +7,7 @@
       <sourceFolder url="file://$MODULE_DIR$/2_tree_height" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/3_network_simulation" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/4_stack_with_max" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/5_max_sliding_window" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

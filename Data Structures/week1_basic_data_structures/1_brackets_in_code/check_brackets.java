@@ -57,8 +57,9 @@ class check_brackets {
         }
 
         // Printing answer, write your code here
-        if (!opening_brackets_stack.empty() && errorPosition == -1) {
-            errorPosition = 1;
+        if (!opening_brackets_stack.isEmpty() && errorPosition == -1) {
+            Bracket unmatchedBracket = opening_brackets_stack.pop();
+            errorPosition = unmatchedBracket.position + 1;
         }
         if (errorPosition == -1) {
             System.out.println("Success");
