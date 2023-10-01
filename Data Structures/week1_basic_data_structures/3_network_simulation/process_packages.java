@@ -39,7 +39,9 @@ class Buffer {
             response.start_time = request.arrival_time;
         }
         else {
-            int new_available_time = finish_time_.getLast();
+//            int new_available_time = finish_time_.getLast();
+            int lastElementIndex = finish_time_.size() - 1;
+            int new_available_time = finish_time_.get(lastElementIndex);
             if (request.arrival_time < new_available_time) {
                 response.dropped = true;
                 response.start_time = -1;
