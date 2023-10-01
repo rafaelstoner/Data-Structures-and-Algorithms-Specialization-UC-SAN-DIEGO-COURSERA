@@ -23,17 +23,28 @@ public class StackWithMax {
     public void solve() throws IOException {
         FastScanner scanner = new FastScanner();
         int queries = scanner.nextInt();
-        Stack<Integer> stack = new Stack<Integer>();
+        Stack<Integer> stack = new Stack<>();
+        Stack<Integer> maxStack = new Stack<>(); // Stack to keep track of maximum values
 
         for (int qi = 0; qi < queries; ++qi) {
             String operation = scanner.next();
             if ("push".equals(operation)) {
                 int value = scanner.nextInt();
                 stack.push(value);
+                if (maxStack.isEmpty() || value >= maxStack.peek()) {
+                    maxStack.push(value);
+                }
             } else if ("pop".equals(operation)) {
-                stack.pop();
+                if (!stack.isEmpty()) {
+                    int popped = stack.pop();
+                    if (popped == maxStack.peek()) {
+                        maxStack.pop();
+                    }
+                }
             } else if ("max".equals(operation)) {
-                System.out.println(Collections.max(stack));
+                if (!maxStack.isEmpty()) {
+                    System.out.println(maxStack.peek());
+                }
             }
         }
     }
